@@ -1,7 +1,7 @@
 {
   "name": "njs-chat",
   "version": "1.0.0",
-  "description": "Chat app",
+  "description": "Node Chat App",
   "main": "app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -15,5 +15,14 @@
   "bugs": {
     "url": "https://github.com/thebinod7/njs-chat/issues"
   },
-  "homepage": "https://github.com/thebinod7/njs-chat#readme"
+  "homepage": "https://github.com/thebinod7/njs-chat#readme",
+  "dependencies": {
+    "ejs": "*",
+    "express": "^4.15.2",
+    "nodemon": "*",
+    "socket.io": "^1.7.4",
+    "body-parser": "*",
+    "cookie-parser": "*",
+    "express-flash": "*"
+  }
 }

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Node - Chat</title>
+    <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="/js/socket.io/socket.io.js"></script>
+    <style>
+        body {
+            margin-top: 30px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-4">
+            <div class="well">
+                <h3>Online Users</h3>
+                <div id="users" class="list-group"></div>
+            </div>
+        </div>
+        <div class="col-md-8">
+            <div id="chat">
+                <form id="message-form">
+                    <div class="form-group">
+                        <label for="message">Enter Message:</label>
+                        <textarea class="form-control" rows="5" id="message"></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Send Message</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    $(function () {
+        var socket = io.connect();
+    });
+</script>
+</body>
+</html>
