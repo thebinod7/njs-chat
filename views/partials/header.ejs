@@ -24,8 +24,7 @@
           <!-- <li class="active"><a href="#">Home <span class="sr-only">(current)</span></a></li> -->
           <li><a href="#">Features</a></li>
           <li><a href="#">Screenshot</a></li>
-          <li><a href="/user/signup">Signup</a></li>
-          <li><a href="/user/login">Login</a></li>
+          <li><a href="#">Gallery</a></li>
           </ul>
         </div><!-- /.navbar-collapse -->
         </div><!-- /.container-fluid -->
@@ -37,8 +36,20 @@
                 <div class="block-right">
                     <div class="contact-area">
                         <ul>
-                            <li><i class="fa fa-phone-square"></i>800-123-456</li>
-                            <li><i class="fa fa-envelope-o"></i>smallapps@gmail.com</li>
+                          <% if (!locals.user) { %>
+                          <li><a href="/user/signup">Signup</a></li>
+                          <li><a href="/user/login">Login</a></li>
+                          <% } else {%>
+                            <li>
+                            <div class="dropdown">
+                              <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Hi, <%= locals.user.username %>
+                              <span class="caret"></span></button>
+                              <ul class="dropdown-menu">
+                                <li><a href="/user/logout">Logout</a></li>
+                              </ul>
+                            </div>
+                          </li>
+                          <% } %>
                         </ul>
                     </div>
                 </div>

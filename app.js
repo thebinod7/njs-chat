@@ -39,6 +39,12 @@ app.use(session({
  }));
 app.use(flash());
 
+app.use(function(req, res, next){
+  res.locals.user = req.session.user;
+  res.locals.loggedIn = req.session.loggedIn;
+  next();
+});
+
 
 //Body parser middleware
 // parse application/x-www-form-urlencoded.
