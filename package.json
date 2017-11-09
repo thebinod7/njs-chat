@@ -17,12 +17,17 @@
   },
   "homepage": "https://github.com/thebinod7/njs-chat#readme",
   "dependencies": {
+    "bcryptjs": "*",
     "body-parser": "*",
+    "connect-redis": "^3.3.0",
     "cookie-parser": "*",
     "ejs": "*",
     "express": "^4.15.2",
+    "express-ejs-layouts": "*",
     "express-flash": "*",
+    "express-session": "*",
     "morgan": "^1.8.1",
+    "mongoose": "*",
     "nodemon": "*",
     "socket.io": "^1.7.4"
   }

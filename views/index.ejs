@@ -23,7 +23,7 @@
             <form id="user-form">
                 <div class="form-group">
                     <label for="message">Enter Username:</label>
-                    <input type="text" class="form-control" id="username"></input>
+                    <input type="text" class="form-control" id="username" required></input>
                 </div>
                 <button type="submit" class="btn btn-primary">Start Chat</button>
             </form>
@@ -41,7 +41,7 @@
                 <form id="message-form">
                     <div class="form-group">
                         <label for="message">Enter Message:</label>
-                        <input type="text" class="form-control" id="message"></input>
+                        <input type="text" class="form-control" id="message" required></input>
                     </div>
                     <button type="submit" class="btn btn-primary">Send Message</button>
                 </form>
@@ -66,7 +66,7 @@
           socket.emit('send message', message.val())
           message.val('');
         });
-        
+
         socket.on('new message', function (data) {
           chat.append('<div class="well"><strong>'+ data.user +'</strong>:'+ data.msg +'</div>')
         });

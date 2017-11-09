@@ -1,0 +1,29 @@
+<div id="signup-form" class="container form-submit">
+  <h1 class="text-primary">Signup to get started!</h1>
+  <% if(messages.error) { %>
+            <div class="alert alert-danger" style="<%= messages.error ? 'margin-top:20px;' : 'display: none' %>"><strong><%= messages.error ? messages.error[0] : '' %></strong></div>
+        <% } %>
+        <% if(messages.success) { %>
+              <div class="alert alert-success" style="<%= messages.success ? 'margin-top:20px;' : 'display: none' %>"><strong><%= messages.success ? messages.success[0] : '' %></strong></div>
+        <% } %>
+  <div class="row">
+    <div class="col-md-8">
+      <form method="post" action="/user/signup">
+        <div class="form-group">
+          <label for="fullname">Full name:</label>
+          <input type="text" class="form-control" name="fullname" required>
+        </div>
+        <div class="form-group">
+          <label for="username">Username:</label>
+          <input type="text" class="form-control" name="username" required>
+        </div>
+        <div class="form-group">
+          <label for="password">Password:</label>
+          <input type="password" class="form-control" name="password" required>
+        </div>
+        <button type="submit" class="btn btn-success">Submit</button>
+    </form>
+    </div>
+    <div class="col-md-4"></div>
+  </div>
+</div>
