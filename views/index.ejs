@@ -66,6 +66,7 @@
 
       userForm.submit(function (e) {
         e.preventDefault();
+        testEvent();
         checkUsername();
         socket.emit('new user', username.val(),function (data) {
           if(data){
@@ -81,6 +82,10 @@
           $('#user-exist').html('<p style="color:red">' + data + '</p>')
           return false;
        });
+      }
+
+      function testEvent(){
+        socket.emit('clientEvent', 'Custom event from client');
       }
 
       socket.on('get users',function (data) {

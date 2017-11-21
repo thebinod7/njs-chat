@@ -109,6 +109,10 @@ io.sockets.on('connection', function (socket) {
      }
   });
 
+  socket.on('clientEvent', function(data) {
+     console.log('Result:',data);
+  });
+
   function updateUsername() {
     io.sockets.emit('get users',users);
   }
