@@ -3,6 +3,7 @@
     <div class="col-md-4">
         <div class="well" style="min-height:400px;">
             <h3><strong>Online Users</strong></h3>
+            <button id="getUsers" class="btn btn-success">Get Users</button>
             <hr>
             <div id="users" class="list-group"></div>
         </div>
@@ -19,3 +20,50 @@
     </div>
   </div>
 </div>
+
+<script src="/js/socket.io/socket.io.js"></script>
+<script>
+    $(function () {
+        var socket = io.connect();
+        var msgForm = $('#message-form');
+        var message = $('#message');
+        var chat = $('#chat');
+        var userForm = $('#user-form');
+        var user_area = $('#user_area');
+        var users = $('#users');
+        var username = $('#username');
+        var message_area = $('#message_area');
+        var onlineUsers = $('#getUsers');
+
+        onlineUsers.click(function(){
+          socket.emit('new user', <%= locals.user.username %>,function (data) {
+            console.log('data',data);
+            if(data){
+              user_area.hide();
+              message_area.show();
+            }
+          })
+          <%= locals.user.username %>
+        });
+
+        msgForm.submit(function (e) {
+          e.preventDefault();
+          console.log('Submitted');
+          socket.emit('send message', message.val())
+          message.val('');
+        });
+
+        socket.on('new message', function (data) {
+          chat.append('<div class="well"><strong>'+ data.user +'</strong>:'+ data.msg +'</div>')
+        });
+
+      socket.on('get users',function (data) {
+        console.log('woowowowowo');
+        var html = '';
+        for(i=0; i<data.length; i++){
+          html += '<li class="list-group-item text-success"><span class="fa fa-user"></span> '+data[i]+'</li>'
+        }
+        users.html(html);
+      });
+    });
+</script>

@@ -31,12 +31,26 @@ app.set('view engine', 'ejs');
 app.use(expressLayouts);
 app.set('layout', 'layouts/default');
 app.set('layout extractScripts', true);
-app.use(session({
-   secret: 'T$mp12345678',
-   resave: false,
-   saveUninitialized: true,
-   store: new RedisStore
- }));
+// app.use(session({
+//    secret: 'T$mp12345678',
+//    resave: false,
+//    saveUninitialized: true,
+//    store: new RedisStore
+//  }));
+
+
+const sessionMiddleware = session({
+  secret: 'T$mp12345678',
+  resave: false,
+  saveUninitialized: true,
+  store: new RedisStore
+});
+
+io.use(function(socket, next) {
+    sessionMiddleware(socket.request, socket.request.res, next);
+});
+
+app.use(sessionMiddleware);
 app.use(flash());
 
 app.use(function(req, res, next){
@@ -84,13 +98,19 @@ io.sockets.on('connection', function (socket) {
 
   //New User
   socket.on('new user',function (data,callback) {
-    callback(true);
-    socket.username = data;
-    users.push(socket.username);
-    updateUsername();
+    var isExist = users.includes(data);
+    if(isExist === false) {
+      callback(true);
+      socket.username = data;
+      users.push(socket.username);
+      updateUsername();
+     } else {
+        socket.emit('userExists', data + ' username is taken! Try some other username.');
+     }
   });
 
   function updateUsername() {
     io.sockets.emit('get users',users);
   }
+
 });
